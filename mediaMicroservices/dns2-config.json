@@ -9,231 +9,231 @@
                 {
                     "id": 1,
                     "hostname": "jaeger",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 2,
                     "hostname": "movie-id-memcached",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 3,
                     "hostname": "movie-id-mongodb",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 4,
                     "hostname": "movie-id-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 5,
                     "hostname": "rating-redis",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 6,
                     "hostname": "rating-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 7,
                     "hostname": "text-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 8,
                     "hostname": "unique-id-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 9,
                     "hostname": "user-memcached",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 10,
                     "hostname": "user-mongodb",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 11,
                     "hostname": "user-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 12,
                     "hostname": "compose-review-memcached",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 13,
                     "hostname": "compose-review-service",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 14,
                     "hostname": "movie-review-mongodb",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 15,
                     "hostname": "movie-review-redis",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 16,
                     "hostname": "movie-review-service",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 17,
                     "hostname": "review-storage-memcached",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 18,
                     "hostname": "review-storage-mongodb",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 19,
                     "hostname": "review-storage-service",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 20,
                     "hostname": "user-review-mongodb",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 21,
                     "hostname": "user-review-redis",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 22,
                     "hostname": "user-review-service",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 23,
                     "hostname": "cast-info-memcached",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 24,
                     "hostname": "cast-info-mongodb",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 25,
                     "hostname": "cast-info-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 26,
                     "hostname": "jaeger",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 27,
                     "hostname": "movie-info-memcached",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 28,
                     "hostname": "movie-info-mongodb",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 29,
                     "hostname": "movie-info-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 30,
                     "hostname": "nginx-thrift",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 31,
                     "hostname": "plot-memcached",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 32,
                     "hostname": "plot-mongodb",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 33,
                     "hostname": "plot-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 }
