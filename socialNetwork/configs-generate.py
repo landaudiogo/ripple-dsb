@@ -41,7 +41,7 @@ def main(argv):
             if "social-network-microservices" in value["image"]:
                 value["ports"][0] = f"{port}:{port}"
                 value["volumes"] = [
-                    "./compose-service-config.json:/social-network-microservices/config/service-config.json",
+                    "./config-compose:/social-network-microservices/config",
                     "/etc/resolv.conf:/etc/resolv.conf"
                 ]
             vmservices[i].append(f"{host}:{port}")
@@ -50,17 +50,16 @@ def main(argv):
             yaml.dump(compose, f, indent=2)
 
 
-    svc_conf = {"secret": "secret"}
+
+    svc_conf = svc_conf_og
     for vm, services in vmservices.items():
         for service in services:
             host, port = service.split(":")
             if port == "":
                 continue
-            svc_conf[host] = {
-                "addr": host,
-                "port": int(port)
-            }
-    with open("compose-service-config.json", "w") as f:
+            svc_conf[host]["addr"] = host
+            svc_conf[host]["port"] = int(port)
+    with open("config-compose/service-config.json", "w") as f:
         json.dump(svc_conf, f, indent=4)
     
     for i in range(1, 4):

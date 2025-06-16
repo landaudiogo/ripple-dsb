@@ -4,89 +4,78 @@ services:
     volumes:
     - ./dns2-config.json:/app/conf/config.json
     - /etc/resolv.conf:/etc/resolv.conf
-  user-timeline-service:
-    image: deathstarbench/social-network-microservices:latest
-    hostname: user-timeline-service
-    ports:
-    - 10003:9090
-    restart: always
-    depends_on:
-      jaeger-agent:
-        condition: service_started
-      user-timeline-mongodb:
-        condition: service_started
-    entrypoint: UserTimelineService
-    volumes:
-      - ./config:/social-network-microservices/config
-
-  user-timeline-redis:
-    image: redis
-    hostname: user-timeline-redis
-    ports:
-    - 6383:6379
-    restart: always
-
-  user-timeline-mongodb:
-    image: mongo:4.4.6
-    hostname: user-timeline-mongodb
-    ports:
-    - 27020:27017
-    restart: always
-
-  url-shorten-service:
-    image: deathstarbench/social-network-microservices:latest
-    hostname: url-shorten-service
-    ports:
-    - 10004:9090
-    restart: always
-    entrypoint: UrlShortenService
-    depends_on:
-      jaeger-agent:
-        condition: service_started
-      url-shorten-mongodb:
-        condition: service_started
-    volumes:
-      - ./config:/social-network-microservices/config
-
   url-shorten-memcached:
-    image: memcached
     hostname: url-shorten-memcached
+    image: memcached
     ports:
     - 11213:11211
     restart: always
-
   url-shorten-mongodb:
-    image: mongo:4.4.6
     hostname: url-shorten-mongodb
+    image: mongo:4.4.6
     ports:
     - 27021:27017
     restart: always
-
-  user-service:
-    image: deathstarbench/social-network-microservices:latest
-    hostname: user-service
-    ports:
-    - 10005:9090
-    restart: always
+  url-shorten-service:
     depends_on:
-      jaeger-agent:
+      url-shorten-mongodb:
         condition: service_started
-      user-mongodb:
-        condition: service_started
-    entrypoint: UserService
+    entrypoint: UrlShortenService
+    hostname: url-shorten-service
+    image: deathstarbench/social-network-microservices:latest
+    ports:
+    - 10004:10004
+    restart: always
     volumes:
-      - ./config:/social-network-microservices/config
-
+    - ./config-compose:/social-network-microservices/config
+    - /etc/resolv.conf:/etc/resolv.conf
   user-memcached:
-    image: memcached
     hostname: user-memcached
+    image: memcached
     ports:
     - 11214:11211
     restart: always
-
   user-mongodb:
-    image: mongo:4.4.6
     hostname: user-mongodb
+    image: mongo:4.4.6
     ports:
     - 27023:27017
     restart: always
+  user-service:
+    depends_on:
+      user-mongodb:
+        condition: service_started
+    entrypoint: UserService
+    hostname: user-service
+    image: deathstarbench/social-network-microservices:latest
+    ports:
+    - 10005:10005
+    restart: always
+    volumes:
+    - ./config-compose:/social-network-microservices/config
+    - /etc/resolv.conf:/etc/resolv.conf
+  user-timeline-mongodb:
+    hostname: user-timeline-mongodb
+    image: mongo:4.4.6
+    ports:
+    - 27020:27017
+    restart: always
+  user-timeline-redis:
+    hostname: user-timeline-redis
+    image: redis
+    ports:
+    - 6383:6379
+    restart: always
+  user-timeline-service:
+    depends_on:
+      user-timeline-mongodb:
+        condition: service_started
+    entrypoint: UserTimelineService
+    hostname: user-timeline-service
+    image: deathstarbench/social-network-microservices:latest
+    ports:
+    - 10003:10003
+    restart: always
+    volumes:
+    - ./config-compose:/social-network-microservices/config
+    - /etc/resolv.conf:/etc/resolv.conf
