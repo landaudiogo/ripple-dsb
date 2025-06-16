@@ -1,0 +1,92 @@
+services:
+  dns-media:
+    image: defreitas/dns-proxy-server
+    volumes:
+    - ./dns2-config.json:/app/conf/config.json
+    - /etc/resolv.conf:/etc/resolv.conf
+  user-timeline-service:
+    image: deathstarbench/social-network-microservices:latest
+    hostname: user-timeline-service
+    ports:
+    - 10003:9090
+    restart: always
+    depends_on:
+      jaeger-agent:
+        condition: service_started
+      user-timeline-mongodb:
+        condition: service_started
+    entrypoint: UserTimelineService
+    volumes:
+      - ./config:/social-network-microservices/config
+
+  user-timeline-redis:
+    image: redis
+    hostname: user-timeline-redis
+    ports:
+    - 6383:6379
+    restart: always
+
+  user-timeline-mongodb:
+    image: mongo:4.4.6
+    hostname: user-timeline-mongodb
+    ports:
+    - 27020:27017
+    restart: always
+
+  url-shorten-service:
+    image: deathstarbench/social-network-microservices:latest
+    hostname: url-shorten-service
+    ports:
+    - 10004:9090
+    restart: always
+    entrypoint: UrlShortenService
+    depends_on:
+      jaeger-agent:
+        condition: service_started
+      url-shorten-mongodb:
+        condition: service_started
+    volumes:
+      - ./config:/social-network-microservices/config
+
+  url-shorten-memcached:
+    image: memcached
+    hostname: url-shorten-memcached
+    ports:
+    - 11213:11211
+    restart: always
+
+  url-shorten-mongodb:
+    image: mongo:4.4.6
+    hostname: url-shorten-mongodb
+    ports:
+    - 27021:27017
+    restart: always
+
+  user-service:
+    image: deathstarbench/social-network-microservices:latest
+    hostname: user-service
+    ports:
+    - 10005:9090
+    restart: always
+    depends_on:
+      jaeger-agent:
+        condition: service_started
+      user-mongodb:
+        condition: service_started
+    entrypoint: UserService
+    volumes:
+      - ./config:/social-network-microservices/config
+
+  user-memcached:
+    image: memcached
+    hostname: user-memcached
+    ports:
+    - 11214:11211
+    restart: always
+
+  user-mongodb:
+    image: mongo:4.4.6
+    hostname: user-mongodb
+    ports:
+    - 27023:27017
+    restart: always

@@ -1,0 +1,84 @@
+services:
+  dns-media:
+    image: defreitas/dns-proxy-server
+    volumes:
+    - ./dns1-config.json:/app/conf/config.json
+    - /etc/resolv.conf:/etc/resolv.conf
+  social-graph-service:
+    image: deathstarbench/social-network-microservices:latest
+    hostname: social-graph-service
+    ports:
+    - 10000:9090
+    depends_on:
+      jaeger-agent:
+        condition: service_started
+      social-graph-mongodb:
+        condition: service_started
+    restart: always
+    entrypoint: SocialGraphService
+    volumes:
+      - ./config:/social-network-microservices/config
+
+  social-graph-mongodb:
+    image: mongo:4.4.6
+    hostname: social-graph-mongodb
+    ports:
+    - 27018:27017
+    restart: always
+
+  social-graph-redis:
+    image: redis
+    hostname: social-graph-redis
+    ports:
+    - 6380:6379
+    restart: always
+
+  home-timeline-redis:
+    image: redis
+    hostname: home-timeline-redis
+    ports:
+    - 6381:6379
+    restart: always
+
+  compose-post-service:
+    image: deathstarbench/social-network-microservices:latest
+    hostname: compose-post-service
+    ports:
+    - 10001:9090
+    restart: always
+    depends_on:
+      jaeger-agent:
+        condition: service_started
+    entrypoint: ComposePostService
+    volumes:
+      - ./config:/social-network-microservices/config
+
+  post-storage-service:
+    image: deathstarbench/social-network-microservices:latest
+    hostname: post-storage-service
+    ports:
+    - 10002:9090
+    restart: always
+    depends_on:
+      jaeger-agent:
+        condition: service_started
+      post-storage-mongodb:
+        condition: service_started
+    entrypoint: PostStorageService
+    volumes:
+      - ./config:/social-network-microservices/config
+
+  post-storage-memcached:
+    image: memcached
+    hostname: post-storage-memcached
+    ports:
+    - 11212:11211
+    restart: always
+
+  post-storage-mongodb:
+    image: mongo:4.4.6
+    hostname: post-storage-mongodb
+    ports:
+    - 27019:27017
+    restart: always
+
