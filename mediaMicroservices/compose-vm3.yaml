@@ -68,7 +68,7 @@ services:
     hostname: nginx-thrift
     image: yg397/openresty-thrift:xenial
     ports:
-    - 8080:8080
+    - 3009:8080
     restart: always
     volumes:
     - ./nginx-web-server-distributed-docker/lua-scripts:/usr/local/openresty/nginx/lua-scripts
