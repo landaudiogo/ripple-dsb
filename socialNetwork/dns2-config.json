@@ -9,196 +9,196 @@
                 {
                     "id": 1,
                     "hostname": "jaeger",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 2,
                     "hostname": "compose-post-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 3,
                     "hostname": "home-timeline-redis",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 4,
                     "hostname": "post-storage-memcached",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 5,
                     "hostname": "post-storage-mongodb",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 6,
                     "hostname": "post-storage-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 7,
                     "hostname": "social-graph-mongodb",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 8,
                     "hostname": "social-graph-redis",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 9,
                     "hostname": "social-graph-service",
-                    "ip": "172.31.21.222",
+                    "ip": "18.197.157.103",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 10,
                     "hostname": "url-shorten-memcached",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 11,
                     "hostname": "url-shorten-mongodb",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 12,
                     "hostname": "url-shorten-service",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 13,
                     "hostname": "user-memcached",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 14,
                     "hostname": "user-mongodb",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 15,
                     "hostname": "user-service",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 16,
                     "hostname": "user-timeline-mongodb",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 17,
                     "hostname": "user-timeline-redis",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 18,
                     "hostname": "user-timeline-service",
-                    "ip": "172.31.23.24",
+                    "ip": "3.65.2.55",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 19,
                     "hostname": "home-timeline-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 20,
                     "hostname": "jaeger-agent",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 21,
                     "hostname": "media-frontend",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 22,
                     "hostname": "media-memcached",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 23,
                     "hostname": "media-mongodb",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 24,
                     "hostname": "media-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 25,
                     "hostname": "nginx-thrift",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 26,
                     "hostname": "text-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 27,
                     "hostname": "unique-id-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 },
                 {
                     "id": 28,
                     "hostname": "user-mention-service",
-                    "ip": "172.31.28.169",
+                    "ip": "18.193.68.182",
                     "ttl": 60,
                     "type": "A"
                 }
