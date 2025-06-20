@@ -19,7 +19,7 @@ tmpfile="$(mktemp /tmp/media-register-users.XXXXXX)"
 tmperror="$(mktemp /tmp/media-register-users-error.XXXXXX)"
 
 for i in {1..1000}; do
-    echo "register user $i"
+    echo "register movie $i"
     httpcode=$(
         curl -o "$tmpfile" -w '%{http_code}\n' -d "title=title_"$i"&movie_id=movie_id_"$i \
             http://"$webserver"/wrk2-api/movie/register 2>"$tmperror"
@@ -31,7 +31,7 @@ for i in {1..1000}; do
         echo "'''"
         break
     else
-        if ! [[ $httpcode =~ '2\d\d' ]]; then
+        if ! (( $httpcode == 200 )); then
             echo "request failed:" 
             echo "'''"
             cat "$tmpfile"

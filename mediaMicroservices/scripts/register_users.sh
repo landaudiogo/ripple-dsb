@@ -31,8 +31,8 @@ for i in {1..1000}; do
         echo "'''"
         break
     else
-        if ! [[ $httpcode =~ '2\d\d' ]]; then
-            echo "request failed:" 
+        if ! (( $httpcode == 200 )); then
+            echo "request failed: $httpcode" 
             echo "'''"
             cat "$tmpfile"
             echo "'''"
