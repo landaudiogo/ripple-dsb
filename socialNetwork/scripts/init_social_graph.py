@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 import aiohttp
 import asyncio
 import os
@@ -5,6 +7,8 @@ import string
 import random
 import argparse
 
+
+GRAPH_DATASETS = os.getenv("GRAPH_DATASETS", "datasets/social-graph")
 
 async def upload_follow(session, addr, user_0, user_1):
   payload = {'user_name': 'username_' + user_0,
@@ -141,9 +145,9 @@ if __name__ == '__main__':
   parser.add_argument('--limit', type=int, help='total number simultaneous connections', default=200)
   args = parser.parse_args()
 
-  with open(os.path.join('datasets/social-graph', args.graph, f'{args.graph}.nodes'), 'r') as f:
+  with open(os.path.join(GRAPH_DATASETS, args.graph, f'{args.graph}.nodes'), 'r') as f:
     nodes = getNumNodes(f)
-  with open(os.path.join('datasets/social-graph', args.graph, f'{args.graph}.edges'), 'r') as f:
+  with open(os.path.join(GRAPH_DATASETS, args.graph, f'{args.graph}.edges'), 'r') as f:
     edges = getEdges(f)
 
   random.seed(1)   # deterministic random numbers
