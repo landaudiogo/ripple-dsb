@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.name }}
+  namespace: {{ .Release.Namespace }}
   labels:
     socialnetwork/service: {{ .Values.name }}
 data:

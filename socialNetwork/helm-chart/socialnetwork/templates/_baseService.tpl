@@ -4,6 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.name }}
+  namespace: {{ .Release.Namespace }}
 spec:
   type: {{ .Values.type | default .Values.global.serviceType }}
   ports:  
