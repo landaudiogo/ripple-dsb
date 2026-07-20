@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import aiohttp
 import asyncio
 import sys
@@ -5,24 +7,69 @@ import json
 import argparse
 
 async def upload_cast_info(session, addr, cast):
-  async with session.post(addr + "/wrk2-api/cast-info/write", json=cast) as resp:
-    return await resp.text()
+    path = addr + "/wrk2-api/cast-info/write"
+    async with session.post(path, json=cast) as resp:
+        body = await resp.text()
+        if resp.status != 200:
+            print("\n\n===========================")
+            print(path, cast)
+            print(resp.status, body)
+            print("===========================")
+        return body
 
 async def upload_plot(session, addr, plot):
-  async with session.post(addr + "/wrk2-api/plot/write", json=plot) as resp:
-    return await resp.text()
+    path = addr + "/wrk2-api/plot/write"
+    async with session.post(path, json=plot) as resp:
+        body = await resp.text()
+        if resp.status != 200:
+            print("\n\n===========================")
+            print(path, plot)
+            print(resp.status, body)
+            print("===========================")
+        return body
 
 async def upload_movie_info(session, addr, movie):
-  async with session.post(addr + "/wrk2-api/movie-info/write", json=movie) as resp:
-    return await resp.text()
+    path = addr + "/wrk2-api/movie-info/write"
+    async with session.post(path, json=movie) as resp:
+        body = await resp.text()
+        if resp.status != 200:
+            print("\n\n===========================")
+            print(path, movie)
+            print(resp.status, body)
+            print("===========================")
+        return body
+
+async def register_user(session, addr, user):
+    params = {
+        "first_name": user["first_name"],
+        "last_name": user["last_name"],
+        "username": user["username"],
+        "password": user["password"]
+    }
+    path = f"{addr}/wrk2-api/user/register"
+    async with session.post(path, data=params) as resp:
+        body = await resp.text()
+        if resp.status != 200:
+            print("\n\n===========================")
+            print(path, params)
+            print(resp.status, body)
+            print("===========================")
+        return body
 
 async def register_movie(session, addr, movie):
-  params = {
-    "title": movie["title"],
-    "movie_id": movie["movie_id"]
-  }
-  async with session.post(addr + "/wrk2-api/movie/register", data=params) as resp:
-    return await resp.text()
+    params = {
+        "title": movie["title"],
+        "movie_id": movie["movie_id"]
+    }
+    path = addr + "/wrk2-api/movie/register"
+    async with session.post(path, data=params) as resp:
+        body = await resp.text()
+        if resp.status != 200:
+            print("\n\n===========================")
+            print(path, params)
+            print(resp.status, body)
+            print("===========================")
+        return body
 
 async def write_cast_info(addr, raw_casts):
   idx = 0
@@ -89,6 +136,23 @@ async def write_movie_info(addr, raw_movies):
     resps = await asyncio.gather(*tasks)
     print(idx, "movies finished")
 
+async def register_users(addr):
+    conn = aiohttp.TCPConnector(limit=200)
+    tasks = []
+    async with aiohttp.ClientSession(connector=conn) as session:
+        for idx in range(1, 1001):
+            user = {
+                "first_name": f"first_name_{idx}",
+                "last_name": f"last_name_{idx}",
+                "username": f"username_{idx}",
+                "password": f"password_{idx}",
+            }
+            tasks.append(asyncio.ensure_future(register_user(session, addr, user)))
+            if idx % 200 == 0:
+                resps = await asyncio.gather(*tasks)
+                print(idx, "users finished")
+                tasks = []
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument("-c", "--cast", action="store", dest="cast_filename",
@@ -102,6 +166,10 @@ if __name__ == '__main__':
   with open(args.cast_filename, 'r') as cast_file:
     raw_casts = json.load(cast_file)
   loop = asyncio.get_event_loop()
+
+  future = asyncio.ensure_future(register_users(args.server_addr))
+  loop.run_until_complete(future)
+
   future = asyncio.ensure_future(write_cast_info(args.server_addr, raw_casts))
   loop.run_until_complete(future)
 
