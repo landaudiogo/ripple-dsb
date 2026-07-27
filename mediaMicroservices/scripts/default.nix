@@ -14,8 +14,8 @@ let
         '';
     };
 in pkgs.writeScriptBin "init-media-microservices" ''
-    #!/usr/bin/env bash
-    script=$(basename "''${BASH_SOURCE[0]}")
+    #!${pkgs.bash}/bin/bash
+    script=$(${pkgs.coreutils}/bin/basename "''${BASH_SOURCE[0]}")
 
     USAGE="
     Usage: $script <web-server> 
