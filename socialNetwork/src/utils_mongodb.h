@@ -20,6 +20,10 @@ mongoc_client_pool_t* init_mongodb_client_pool(
   uri_str += "&" MONGOC_URI_SERVERSELECTIONTIMEOUTMS "="
       + std::to_string(SERVER_SELECTION_TIMEOUT_MS);
 
+  // Force writes to wait for on-disk journal commit
+  uri_str += "&" MONGOC_URI_JOURNAL "=true";
+  uri_str += "&" MONGOC_URI_W "=1";
+
   mongoc_init();
   bson_error_t error;
   mongoc_uri_t *mongodb_uri =
