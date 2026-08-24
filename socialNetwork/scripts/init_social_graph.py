@@ -10,43 +10,72 @@ import argparse
 
 GRAPH_DATASETS = os.getenv("GRAPH_DATASETS", "datasets/social-graph")
 
-async def upload_follow(session, addr, user_0, user_1):
-  payload = {'user_name': 'username_' + user_0,
-             'followee_name': 'username_' + user_1}
-  async with session.post(addr + '/wrk2-api/user/follow', data=payload) as resp:
-    return await resp.text()
+async def upload_follow(session, addr, user_0, user_1, retries=5):
+    payload = {
+        'user_name': 'username_' + user_0,
+        'followee_name': 'username_' + user_1
+    }
+    for attempt in range(1, retries+1):
+        async with session.post(addr + '/wrk2-api/user/follow', data=payload) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
 
 
-async def upload_register(session, addr, user):
-  payload = {'first_name': 'first_name_' + user, 'last_name': 'last_name_' + user,
-             'username': 'username_' + user, 'password': 'password_' + user, 'user_id': user}
-  async with session.post(addr + '/wrk2-api/user/register', data=payload) as resp:
-    return await resp.text()
+async def upload_register(session, addr, user, retries=5):
+    payload = {
+        'first_name': 'first_name_' + user,
+        'last_name': 'last_name_' + user,
+        'username': 'username_' + user,
+        'password': 'password_' + user,
+        'user_id': user,
+    }
+    for attempt in range(1, retries+1):
+        async with session.post(addr + '/wrk2-api/user/register', data=payload) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
 
 
-async def upload_compose(session, addr, user_id, num_users):
-  text = ''.join(random.choices(string.ascii_letters + string.digits, k=256))
-  # user mentions
-  for _ in range(random.randint(0, 5)):
-    text += ' @username_' + str(random.randint(0, num_users))
-  # urls
-  for _ in range(random.randint(0, 5)):
-    text += ' http://' + \
-        ''.join(random.choices(string.ascii_lowercase + string.digits, k=64))
-  # media
-  media_ids = []
-  media_types = []
-  for _ in range(random.randint(0, 5)):
-    media_ids.append('\"' + ''.join(random.choices(string.digits, k=18)) + '\"')
-    media_types.append('\"png\"')
-  payload = {'username': 'username_' + str(user_id),
-             'user_id': str(user_id),
-             'text': text,
-             'media_ids': '[' + ','.join(media_ids) + ']',
-             'media_types': '[' + ','.join(media_types) + ']',
-             'post_type': '0'}
-  async with session.post(addr + '/wrk2-api/post/compose', data=payload) as resp:
-    return await resp.text()
+async def upload_compose(session, addr, user_id, num_users, retries=5):
+    text = ''.join(random.choices(string.ascii_letters + string.digits, k=256))
+
+    # user mentions
+    for _ in range(random.randint(0, 5)):
+        text += ' @username_' + str(random.randint(0, num_users))
+
+    # urls
+    for _ in range(random.randint(0, 5)):
+        text += ' http://' + \
+            ''.join(random.choices(string.ascii_lowercase + string.digits, k=64))
+
+    # media
+    media_ids = []
+    media_types = []
+    for _ in range(random.randint(0, 5)):
+        media_ids.append('\"' + ''.join(random.choices(string.digits, k=18)) + '\"')
+        media_types.append('\"png\"')
+
+    payload = {
+        'username': 'username_' + str(user_id),
+        'user_id': str(user_id),
+        'text': text,
+        'media_ids': '[' + ','.join(media_ids) + ']',
+        'media_types': '[' + ','.join(media_types) + ']',
+        'post_type': '0'
+    }
+
+    for attempt in range(1, retries+1):
+        async with session.post(addr + '/wrk2-api/post/compose', data=payload) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
 
 
 def getNumNodes(file):
