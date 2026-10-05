@@ -6,40 +6,37 @@ import sys
 import json
 import argparse
 
-async def upload_cast_info(session, addr, cast):
+async def upload_cast_info(session, addr, cast, retries=5):
     path = addr + "/wrk2-api/cast-info/write"
-    async with session.post(path, json=cast) as resp:
-        body = await resp.text()
-        if resp.status != 200:
-            print("\n\n===========================")
-            print(path, cast)
-            print(resp.status, body)
-            print("===========================")
-        return body
+    for attempt in range(1, retries+1):
+        async with session.post(path, json=cast) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
 
-async def upload_plot(session, addr, plot):
+async def upload_plot(session, addr, plot, retries=5):
     path = addr + "/wrk2-api/plot/write"
-    async with session.post(path, json=plot) as resp:
-        body = await resp.text()
-        if resp.status != 200:
-            print("\n\n===========================")
-            print(path, plot)
-            print(resp.status, body)
-            print("===========================")
-        return body
+    for attempt in range(1, retries+1):
+        async with session.post(path, json=plot) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
 
-async def upload_movie_info(session, addr, movie):
+async def upload_movie_info(session, addr, movie, retries=5):
     path = addr + "/wrk2-api/movie-info/write"
-    async with session.post(path, json=movie) as resp:
-        body = await resp.text()
-        if resp.status != 200:
-            print("\n\n===========================")
-            print(path, movie)
-            print(resp.status, body)
-            print("===========================")
-        return body
+    for attempt in range(1, retries+1):
+        async with session.post(path, json=movie) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
 
-async def register_user(session, addr, user):
+async def register_user(session, addr, user, retries=5):
     params = {
         "first_name": user["first_name"],
         "last_name": user["last_name"],
@@ -47,29 +44,28 @@ async def register_user(session, addr, user):
         "password": user["password"]
     }
     path = f"{addr}/wrk2-api/user/register"
-    async with session.post(path, data=params) as resp:
-        body = await resp.text()
-        if resp.status != 200:
-            print("\n\n===========================")
-            print(path, params)
-            print(resp.status, body)
-            print("===========================")
-        return body
+    for attempt in range(1, retries+1):
+        async with session.post(path, data=params) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
 
-async def register_movie(session, addr, movie):
+async def register_movie(session, addr, movie, retries=5):
     params = {
         "title": movie["title"],
         "movie_id": movie["movie_id"]
     }
     path = addr + "/wrk2-api/movie/register"
-    async with session.post(path, data=params) as resp:
-        body = await resp.text()
-        if resp.status != 200:
-            print("\n\n===========================")
-            print(path, params)
-            print(resp.status, body)
-            print("===========================")
-        return body
+    for attempt in range(1, retries+1):
+        async with session.post(path, data=params) as resp:
+            # Check status and retry in case it's not the last attempt
+            if (resp.status // 100 != 2) and (attempt != retries):
+                await asyncio.sleep(attempt*1)
+                continue
+            return await resp.text()
+
 
 async def write_cast_info(addr, raw_casts):
   idx = 0
